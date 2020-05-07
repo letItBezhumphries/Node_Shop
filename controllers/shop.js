@@ -102,6 +102,10 @@ exports.postOrder = (req, res, next) => {
       return order.save();
     })
     .then((result) => {
+      //need to clear the cart
+      return req.user.clearCart();
+    })
+    .then(() => {
       res.redirect("/orders");
     })
     .catch((err) => console.log(err));
